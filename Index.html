@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>168Victory VIP - VTR168</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background: #000; color: white; margin: 0; padding: 20px 0; display: flex; justify-content: center; }
+        .container { width: 95%; max-width: 380px; background: linear-gradient(180deg, #1a002a 0%, #000 100%); padding: 30px 15px; border-radius: 30px; border: 2px solid #bd93f9; text-align: center; box-shadow: 0 0 25px rgba(189, 147, 249, 0.3); box-sizing: border-box; }
+        .logo-link { display: inline-block; text-decoration: none; margin-bottom: 10px; }
+        .logo { width: 180px; filter: drop-shadow(0 0 8px #bd93f9); }
+        .welcome-text { font-size: 14px; color: #eee; margin-bottom: 25px; line-height: 1.6; }
+        .btn-group { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .btn { display: block; width: 100%; max-width: 280px; padding: 14px 0; margin-bottom: 12px; border-radius: 12px; text-decoration: none; font-size: 18px; font-weight: bold; text-align: center; transition: 0.3s; box-sizing: border-box; }
+        .btn-reg { background: linear-gradient(135deg, #6a1b9a 0%, #4a0072 100%); color: #ffd700; border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        .btn-check { background: linear-gradient(90deg, #ff79c6, #bd93f9); color: white; border: none; cursor: pointer; animation: pulseBtn 2s infinite; margin-bottom: 8px; }
+        .note-text { font-size: 11px; color: #bd93f9; margin-bottom: 20px; font-weight: 300; }
+        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        
+        .camp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; width: 100%; }
+        .camp-card { background: rgba(189, 147, 249, 0.1); border: 1px solid #bd93f9; padding: 12px; border-radius: 15px; cursor: pointer; transition: 0.2s; }
+        .camp-card img { height: 40px; margin-bottom: 5px; object-fit: contain; width: 100%; }
+
+        .game-item { display: flex; align-items: center; background: rgba(255,255,255,0.07); padding: 12px; border-radius: 15px; margin-bottom: 12px; border-left: 4px solid #ffd700; text-align: left; }
+        .game-img { width: 65px; height: 65px; border-radius: 10px; margin-right: 12px; object-fit: cover; background: #222; border: 1px solid #444; }
+        .game-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        
+        .row-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .game-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+        
+        .play-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+
+        .bar-container { display: flex; align-items: center; gap: 8px; }
+        .bar-bg { flex-grow: 1; height: 10px; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .bar-fill { height: 100%; transition: width 1.5s ease-in-out; position: relative; }
+        .win-rate { font-size: 13px; font-weight: bold; min-width: 35px; text-align: right; }
+        
+        .line-btn { position: fixed; bottom: 20px; right: 20px; background: #06c755; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; text-decoration: none; font-weight: bold; border: 2px solid #fff; z-index: 100; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="https://member.168victory.vip/register?prefix=t24q3f" class="logo-link">
+        <img src="https://i.postimg.cc/DwVzdDGR/8009782b-5a22-447f-8229-085b9a1512f7.png" class="logo" alt="168Victory">
+    </a>
+    
+    <div class="welcome-text">
+        ยินดีต้อนรับสู่ เช็คอัตราเกมแตกVTR168<br>
+        <span style="color:#ffd700; font-weight:bold;">เว็ปเดิมพันอันดับ1</span>
+    </div>
+    
+    <div class="btn-group">
+        <a href="https://member.168victory.vip/register?prefix=t24q3f" class="btn btn-reg">สมัครสมาชิก (VIP)</a>
+        <button onclick="showCamps()" id="btn-main" class="btn btn-check">🔥 เช็คตารางเกมแตก</button>
+        <div id="note-info" class="note-text">*อัตราเกมแตกจะอัปเดตทุก 6 ชั่วโมง</div>
+    </div>
+
+    <div id="camp-area" style="display:none; margin-top: 10px;">
+        <p style="color:#ffd700; font-size: 14px;">เลือกค่ายเกมเพื่อดูเปอร์เซ็นต์</p>
+        <div class="camp-grid">
+            <div class="camp-card" onclick="loadGames('PG Soft')"><img src="https://i.postimg.cc/9QqJs4rW/PG-Soft.png"><p style="font-size:11px; margin:0;">PG SOFT</p></div>
+            <div class="camp-card" onclick="loadGames('Pragmatic Play')"><img src="https://i.postimg.cc/7ZTmjCfk/PMTS-1697034113.png"><p style="font-size:11px; margin:0;">PRAGMATIC</p></div>
+            <div class="camp-card" onclick="loadGames('Joker')"><img src="https://i.postimg.cc/FHJDwf7N/NJK-1712909624.png"><p style="font-size:11px; margin:0;">NJK</p></div>
+            <div class="camp-card" onclick="loadGames('Nolimit city')"><img src="https://i.postimg.cc/VkbD2Sdw/NLC-1692782032.png"><p style="font-size:11px; margin:0;">NLC</p></div>
+        </div>
+    </div>
+
+    <div id="game-area" style="display:none; margin-top: 10px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
+            <span id="title" style="color:#ffd700; font-weight:bold; font-size:16px;"></span>
+            <span onclick="showCamps()" style="font-size:11px; color:#aaa; text-decoration:underline; cursor:pointer;">ย้อนกลับ</span>
+        </div>
+        <div id="game-list"></div>
+    </div>
+</div>
+
+<a href="https://lin.ee/FBEhAxi" class="line-btn">LINE</a>
+
+<script>
+    const targetLink = "https://member.168victory.vip/register?prefix=t24q3f";
+    const gamesDB = {
+        'PG Soft': [
+            {n:"Anubis Wrath", i:"https://i.postimg.cc/Qd2j1nB8/PGS-Anubis-Wrath-1716881055.webp"},
+            {n:"Chocolate Deluxe", i:"https://i.postimg.cc/rwBqxYdq/PGS-Chocolate-Deluxe-1732705543.webp"},
+            {n:"Dead Man's Riches", i:"https://i.postimg.cc/2SbzqfST/PGS-Dead-Man-s-Riches-1747641007.webp"},
+            {n:"Doomsday Rampage", i:"https://i.postimg.cc/CxBFZVxm/PGS-Doomsday-Rampage-1745223122.webp"},
+            {n:"Fortune Ox", i:"https://i.postimg.cc/Z5BT9h5G/PGS-Fortune-Ox-1702650976.webp"},
+            {n:"Galaxy Miner", i:"https://i.postimg.cc/HkqTXPJk/PGS-Galaxy-Miner-1753260300.webp"},
+            {n:"Gemstones Gold", i:"https://i.postimg.cc/kg07KhVC/PGS-Gemstones-Gold-1709544215.webp"},
+            {n:"Incan Wonders", i:"https://i.postimg.cc/MpMWc8pP/PGS-Incan-Wonders-1740385189.jpg"},
+            {n:"Knockout Riches", i:"https://i.postimg.cc/K86mBsKv/PGS-Knockout-Riches-1745995515.webp"},
+            {n:"Lucky Neko", i:"https://i.postimg.cc/jSpRPkWV/PGS-Lucky-Neko-1702651224.webp"},
+            {n:"Mafia Mayhem", i:"https://i.postimg.cc/nhjHstL8/PGS-Mafia-Mayhem-1702653832.webp"},
+            {n:"Mahjong Ways 2", i:"https://i.postimg.cc/Nj3QmPyq/PGS-Mahjong-Ways-2-1702651260.webp"},
+            {n:"Mr Treasure's Fortune", i:"https://i.postimg.cc/Gm8cB1mK/PGS-Mr-Treasure-s-Fortune-1741244621.webp"},
+            {n:"Oishi Delights", i:"https://i.postimg.cc/Nj3QmPyB/PGS-Oishi-Delights-1728032208.webp"},
+            {n:"Poker Kingdom Win", i:"https://i.postimg.cc/qvPpyZt7/PGS-Poker-Kingdom-Win-1765781366.webp"},
+            {n:"Rave Party Fever", i:"https://i.postimg.cc/bwDzGjvc/PGS-Rave-Party-Fever-1702651395.webp"},
+            {n:"Treasures of Aztec", i:"https://i.postimg.cc/nhynBwXw/PGS-Treasures-of-Aztec-1702651933.webp"},
+            {n:"Werewolf's Hunt", i:"https://i.postimg.cc/8z2TMn72/PGS-Werewolf-s-Hunt-1704443009.webp"},
+            {n:"Wild Ape 3258", i:"https://i.postimg.cc/W1BsgfDj/PGS-Wild-Ape-3258-1724315869.webp"},
+            {n:"Wild Bounty Showdown", i:"https://i.postimg.cc/CxBFZVxW/PGS-Wild-Bounty-Showdown-1702651563.webp"}
+        ],
+        'Pragmatic': [
+            {n:"Gold Party 2", i:"https://i.postimg.cc/Ssq27KnB/PMTS-Gold-Party-2-After-Hours-1751452039.webp"},
+            {n:"Argonauts", i:"https://i.postimg.cc/zXMy27Ls/PMTS-Argonauts-1755852035.webp"},
+            {n:"Mahjong Wins", i:"https://i.postimg.cc/GhN4gK80/PMTS-Askmebet-Mahjong-Wins-1727685243.webp"},
+            {n:"Starlight Princess 1000", i:"https://i.postimg.cc/qMYNDwhH/PMTS-Askmebet-Starlight-Princess-1000-1727864154.webp"},
+            {n:"Sugar Rush 1000", i:"https://i.postimg.cc/9FSDgbRV/PMTS-Askmebet-Sugar-Rush-1000-1727686819.webp"},
+            {n:"Bigger Barn House", i:"https://i.postimg.cc/m2qPpjcQ/PMTS-Bigger-Barn-House-Bonanza-1758797235.webp"},
+            {n:"Code of Cairo", i:"https://i.postimg.cc/8PsFb9CM/PMTS-Code-of-Cairo-1755853308.webp"},
+            {n:"Dragon Tiger Fortunes", i:"https://i.postimg.cc/yYWJTtNF/PMTS-Dragon-Tiger-Fortunes-1769064539.webp"},
+            {n:"Floating Dragon", i:"https://i.postimg.cc/283qxM5n/PMTS-Floating-Dragon-Wild-Horses-1769073474.webp"},
+            {n:"Fortune Ace", i:"https://i.postimg.cc/Kv4K5wYQ/PMTS-Fortune-Ace-Super-Scatter-1758797253.webp"},
+            {n:"Fortune of Olympus", i:"https://i.postimg.cc/qMYNDwtW/PMTS-Fortune-of-Olympus-1766494027.webp"},
+            {n:"Hot Tuna", i:"https://i.postimg.cc/TYSKN0L6/PMTS-Hot-Tuna-1768212476.webp"},
+            {n:"Jackpot Blaze", i:"https://i.postimg.cc/wT3tkZBc/PMTS-Jackpot-Blaze-1755853321.webp"},
+            {n:"Lobster House", i:"https://i.postimg.cc/qMYNDwtG/PMTS-Lobster-House-1756983876.webp"},
+            {n:"Mummy's Jewels", i:"https://i.postimg.cc/QxPFYmB4/PMTS-Mummy-s-Jewels-100-1772004981.webp"},
+            {n:"Rolling in Treasures", i:"https://i.postimg.cc/3J6kf1y1/PMTS-Rolling-in-Treasures-1770706333.webp"},
+            {n:"Starlight Wins", i:"https://i.postimg.cc/m2qPpjc8/PMTS-Starlight-Wins-1745995482.webp"},
+            {n:"Sugar Rush Super", i:"https://i.postimg.cc/m2qPpjzf/PMTS-Sugar-Rush-Super-Scatter-1768556482.webp"},
+            {n:"Waves of Poseidon", i:"https://i.postimg.cc/28J19GqK/PMTS-Waves-of-Poseidon-1751452089.webp"},
+            {n:"Zeus vs Typhon", i:"https://i.postimg.cc/7Yc5t9C3/PMTS-Zeus-vs-Typhon-1764663088.webp"}
+        ],
+        'NJK': [
+            {n:"Black Knight", i:"https://i.postimg.cc/ydXfvWvM/NJK-Black-Knight-1741603850.webp"},
+            {n:"Book of Thermopylae", i:"https://i.postimg.cc/cCxFjZb9/NJK-Book-of-Thermopylae-1767934923.webp"},
+            {n:"Christmas Eve", i:"https://i.postimg.cc/26fcQnFn/NJK-Christmas-Eve-1734512716.webp"},
+            {n:"Christmas Fortune", i:"https://i.postimg.cc/pTY0qyqC/NJK-Christmas-Fortune-1766657138.webp"},
+            {n:"Gates Of Wealth", i:"https://i.postimg.cc/3RHSX2CZ/NJK-Gates-Of-Wealth-1722513748.webp"},
+            {n:"Golden Dragon", i:"https://i.postimg.cc/g0htLghf/NJK-Golden-Dragon-1727786648.webp"},
+            {n:"Huang Fei Hong", i:"https://i.postimg.cc/hjqyLVbn/NJK-Huang-Fei-Hong-1727786415.webp"},
+            {n:"Love Letter", i:"https://i.postimg.cc/ZRh786FR/NJK-Love-Letter-1727786161.webp"},
+            {n:"Lucky God 2", i:"https://i.postimg.cc/PqDVvSDg/NJK-Lucky-God-Progressive-2-1727786151.webp"},
+            {n:"Masquerade", i:"https://i.postimg.cc/MT8P71by/NJK-Masquerade-1727785962.webp"},
+            {n:"Maya Ways", i:"https://i.postimg.cc/RFQPXqXy/NJK-Maya-Ways-1758797349.webp"},
+            {n:"Panda Chef", i:"https://i.postimg.cc/NMwJ6R7Y/NJK-Panda-Chef-1727785702.webp"},
+            {n:"Roma Deluxe", i:"https://i.postimg.cc/Ss7ZDjD6/NJK-Roma-Deluxe-1751450664.webp"},
+            {n:"Safari Life 2", i:"https://i.postimg.cc/43c2HWtT/NJK-Safari-Life-2-1727785527.webp"},
+            {n:"Seven Seas", i:"https://i.postimg.cc/ZRFfV0Vs/NJK-Seven-Seas-1756282871.webp"},
+            {n:"Snake Of Fortune", i:"https://i.postimg.cc/ydXfvWvL/NJK-Snake-Of-Fortune-1739177806.webp"},
+            {n:"Sour Candy", i:"https://i.postimg.cc/xdmpN6HT/NJK-Sour-Candy-1727785191.webp"},
+            {n:"Sweet Tooth", i:"https://i.postimg.cc/JhXYHpJn/NJK-Sweet-Tooth-1727785172.webp"},
+            {n:"Warrior", i:"https://i.postimg.cc/tg6vnBPR/NJK-Warrior-1727784888.webp"},
+            {n:"World of Emoji", i:"https://i.postimg.cc/2yk0JmKX/NJK-World-of-Emoji-1742821340.webp"}
+        ],
+        'NLC': [
+            {n:"Blood Shadow 2", i:"https://i.postimg.cc/tgrdTPvy/NLC-Blood-Shadow-2-1734701917.webp"},
+            {n:"Breakout", i:"https://i.postimg.cc/63gdVKNv/NLC-Breakout-1761214389.webp"},
+            {n:"Brute Force", i:"https://i.postimg.cc/3wLjRpfJ/NLC-Brute-Force-Alien-Onslaught-1755255209.webp"},
+            {n:"Bushido Ways", i:"https://i.postimg.cc/63yrG3Fq/NLC-Bushido-Ways-x-Nudge-1725349155.webp"},
+            {n:"Dead or Deader", i:"https://i.postimg.cc/tgrdTPv4/NLC-Dead-Dead-or-Deader-1755255222.webp"},
+            {n:"Duck Hunters", i:"https://i.postimg.cc/85jRr5xT/NLC-Duck-Hunters-1755255234.webp"},
+            {n:"Duck Hunters HH", i:"https://i.postimg.cc/26VQB6gQ/NLC-Duck-Hunters-Happy-Hour-1769593603.webp"},
+            {n:"Fire in the Hole 2", i:"https://i.postimg.cc/Y9Z1N7wG/NLC-Fire-in-the-Hole-2-1724421236.webp"},
+            {n:"Flight Mode", i:"https://i.postimg.cc/gJnV6J1c/NLC-Flight-Mode-1755255252.webp"},
+            {n:"Folsom Prison", i:"https://i.postimg.cc/pd0QT8Gg/NLC-Folsom-Prison-1704890904.webp"},
+            {n:"Highway to Hell", i:"https://i.postimg.cc/NM56rMZ0/NLC-Highway-to-Hell-1755255262.webp"},
+            {n:"Mental 2", i:"https://i.postimg.cc/j5LHJ5BC/NLC-Mental-2-1755255295.webp"},
+            {n:"Nine To Five", i:"https://i.postimg.cc/SsJ6zsHk/NLC-Nine-To-Five-1704887356.webp"},
+            {n:"San Quentin 2", i:"https://i.postimg.cc/tgrdTPvH/NLC-San-Quentin-2-Death-Row-1728031640.webp"},
+            {n:"Tanked", i:"https://i.postimg.cc/QM6gt5YZ/NLC-Tanked-1734701886.webp"},
+            {n:"The Crypt", i:"https://i.postimg.cc/qRzsCRW8/NLC-The-Crypt-1724419933.webp"},
+            {n:"Tombstone Slaughter", i:"https://i.postimg.cc/4dm6hdjv/NLC-Tombstone-Slaughter-1755255355.webp"},
+            {n:"Tsar Wars", i:"https://i.postimg.cc/sXqpPzRZ/NLC-Tsar-Wars-1755255435.webp"},
+            {n:"Warrior Graveyard", i:"https://i.postimg.cc/k5jN48YC/NLC-Warrior-Graveyard-x-Nudge-1724420421.webp"},
+            {n:"xWays Hoarder", i:"https://i.postimg.cc/9MrdqMs4/NLC-x-Ways-Hoarder-x-Split-1724230453.webp"}
+        ]
+    };
+
+    function showCamps() {
+        document.getElementById('camp-area').style.display = 'block';
+        document.getElementById('game-area').style.display = 'none';
+        document.getElementById('btn-main').style.display = 'none';
+        document.getElementById('note-info').style.display = 'none';
+    }
+
+    function loadGames(camp) {
+        const games = gamesDB[camp];
+        const seed = new Date().getDate() + Math.floor(new Date().getHours()/6) + camp.length;
+        let html = "";
+        
+        games.forEach((game, idx) => {
+            const name = game.n;
+            const img = game.i;
+            const rate = ((seed * (idx + 19)) % 40) + 58; // แรนดอม 58-98%
+            const color = rate > 90 ? "#ffd700" : (rate > 75 ? "#ff79c6" : "#bd93f9");
+            
+            html += `
+            <div class="game-item">
+                <img src="${img}" class="game-img" onerror="this.src='https://via.placeholder.com/65/222/ffd700?text=GAME'">
+                <div class="game-info">
+                    <div class="row-top">
+                        <span class="game-name">${name}</span>
+                        <a href="${targetLink}" class="play-btn">เริ่มเกม</a>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-bg">
+                            <div class="bar-fill" style="width:${rate}%; background:${color}; box-shadow: 0 0 10px ${color};"></div>
+                        </div>
+                        <span class="win-rate" style="color:${color}">${rate}%</span>
+                    </div>
+                </div>
+            </div>`;
+        });
+        document.getElementById('title').innerText = camp;
+        document.getElementById('game-list').innerHTML = html;
+        document.getElementById('camp-area').style.display = 'none';
+        document.getElementById('game-area').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
